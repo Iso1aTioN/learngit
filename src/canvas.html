@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+    <style>
+        canvas{
+            border: 1px solid greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600px" height="600px">
+        版本太低会显示这些元素
+    </canvas>
+    <script>
+        //获取dom中的画布
+        var myCanvas = document.querySelector('canvas');
+        console.log(myCanvas);
+        //获取上下文对象（）参数是2d绘图
+        var ctx = myCanvas.getContext('2d');
+        // ctx.fillStyle = "green"
+        // ctx.rect(50,50,100,40)
+        // ctx.stroke()
+        //矩形 rect
+        //ctx.rect(x,y,w,h)
+        //fill 填充 实心
+        //stroke 描边方式绘图
+        //首先你要填充还是描边 颜色是什么
+        //决定位置和大小
+        //绘制到画布上
+        //ctx.fill()
+        //ctx.lineWidth = 10;设置笔触宽度
+        // ctx.strokeStyle = "pink"
+        // ctx.strokeRect(100,100,100,30)
+        // ctx.strokeStyle = "green";
+        //绘制定点
+        // ctx.moveTo(100,100);
+        // ctx.lineTo(400,100);
+        // ctx.lineTo(400,150);
+        // ctx.lineTo(100,150);
+        // ctx.lineTo(100,100);
+        // ctx.stroke()
+        // 闭合路径ctx.closePath()
+        // ctx.moveTo(100,100);
+        // ctx.lineTo(300,300);
+        // ctx.lineTo(320,200);
+        // ctx.lineTo(420,160);
+        // ctx.closePath();
+        // ctx.lineWidth = 5;
+        // ctx.strokeStyle = "red";
+        // ctx.lineJoin = "round"//边界连接点样式 round 圆角 bevel 斜角
+        // ctx.stroke();
+        // ctx.fillStyle = 'pink'
+        // ctx.fill()
+        //绘制新的开始 beginPath()
+        // ctx.beginPath()
+        // ctx.moveTo(50,50);
+        // ctx.lineTo(100,100);
+        // ctx.stroke();
+       
+        //断点样式
+        // ctx.moveTo(50,50)
+        // ctx.lineTo(300,300)
+        // ctx.strokeStyle = "red"
+        // ctx.lineWidth = 50;
+        // ctx.lineCap = "round"//默认样式 butt 圆角 round 平角 square
+        // ctx.stroke();
+        //作业1 五角星 线 填充
+        //圆
+        //ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise)
+        //xy圆心坐标 radius半径 startAngle弧度起始位置 endAngle弧度终止位置
+        //anticklockwise顺时针false逆时针true
+        //角度 = Math.pi/180° 弧度=180° 弧度约等于57.3
+
+        // ctx.beginPath()
+        // ctx.arc(150,150,100,0,2*Math.PI,false)
+        // ctx.fill()
+        //五角星
+        ctx.beginPath()
+        ctx.moveTo(100,250);
+        ctx.lineTo(500,250);
+        ctx.lineTo(150,500);
+        ctx.lineTo(300,100);
+        ctx.lineTo(450,500);
+        ctx.closePath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "red";
+        ctx.lineJoin = "round"//边界连接点样式 round 圆角 bevel 斜角
+        ctx.stroke();
+        ctx.fillStyle = 'pink'
+        ctx.fill()
+        
+    </script>
+</body>
+</html>
