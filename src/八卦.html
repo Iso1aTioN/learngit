@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八卦</title>
+</head>
+<body>
+    <canvas width="400" height="400" style="border: 1 solid;background: grey;"></canvas>
+    <script>
+        window.onload = function(){
+            var ctx = document.querySelector('canvas').getContext('2d')
+            //绘制白色半圆
+            ctx.beginPath()
+            ctx.arc(200,200,80,1.5*Math.PI,Math.PI/2,false)
+            ctx.fillStyle = "white"
+            ctx.closePath()
+            ctx.fill()
+            //绘制黑色半圆
+            ctx.beginPath()
+            ctx.arc(200,200,80,1.5*Math.PI,Math.PI/2,true)
+            ctx.fillStyle = "black"
+            ctx.closePath()
+            ctx.fill()
+            //绘制黑色的中圆
+            ctx.beginPath()
+            ctx.arc(200,240,40,1.5*Math.PI,Math.PI/2,false)
+            ctx.fillStyle = "black"
+            ctx.closePath()
+            ctx.fill()
+            //绘制白色的中圆
+            ctx.beginPath()
+            ctx.arc(200,160,40,1.5*Math.PI,Math.PI/2,true)
+            ctx.fillStyle = "white"
+            ctx.closePath()
+            ctx.fill()
+            //绘制黑色的小圆
+            ctx.beginPath()
+            ctx.arc(200,160,5,0,2*Math.PI,false)
+            ctx.fillStyle = "black"
+            ctx.closePath()
+            ctx.fill()
+            //绘制白色的小圆
+            ctx.beginPath()
+            ctx.arc(200,240,5,0,2*Math.PI,true)
+            ctx.fillStyle = "white"
+            ctx.closePath()
+            ctx.fill()
+            
+            
+        }
+    </script>
+</body>
+</html>
