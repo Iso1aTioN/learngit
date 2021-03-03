@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹幕</title>
+    <style>
+        #sendText{
+            width: 300px;
+            height: 30px;
+        }
+        /*弹幕样式*/
+        span{
+            position: absolute;
+            color: pink;
+            font-weight: bolder;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video autoplay src="./Fuji.mp4" controls width="600" height="600">
+        <source src="./Fuji.mp4">
+        </video>
+        <div class="commit">
+            <input type="text" name="" id="sendText" placeholder="爆发你的小宇宙吧~">
+            <button id="sendBtn">发送</button>
+        </div>
+    </div>
+    <script>
+        let video = document.querySelector('video');
+        let container = document.getElementsByClassName('container')[0];
+        let sendText = document.querySelector('input');
+        let sendBtn = document.querySelector('button');
+        //产生随机数
+        let random = function(start,end){
+            return Math.floor(Math.random()*(end - start + 1)) + start;
+
+        }
+        let danmu = function(){
+            let span = document.createElement('span');//创建一个新的span
+            span.innerHTML = sendText.value;//将文本框的内容给span
+            sendText.value = "";//清空文本框
+            let speed = random(5,10);//获取随机速度
+            span.style.left = video.width + "px";//span 弹幕从右边出场
+            let totalHeight = video.offsetTop + video.height;//总高度
+            span.style.top = random(video.offsetTop+10,totalHeight-10)+'px'
+            container.appendChild(span);
+            let stopTime = setInterval(function(){
+                span.style.left = parseInt(span.style.left) - speed + 'px'
+                if(parseInt(span.style.left)<0){
+                    clearInterval(stopTime);
+                    container.removeChild(span)
+                }
+            },50)
+        }
+        sendBtn.onclick = danmu;
+    </script>
+</body>
+</html>
