@@ -8,7 +8,7 @@
 </head>
 <body>
 <!--视频-->
-<video src="./Lebron.MP4" controls>
+<video src="./Fuji.mp4" controls width="800" height="600">
 你的浏览器不支持video 请升级浏览器
 </video>
 <button>静音</button>
@@ -19,7 +19,6 @@
 <button>查看api属性</button>
 <div id="box"></div>
 <!--音频-->
-<audio src=""></audio>
 <!-- src 文件路径
      width 设置播放器速度
      height 设置播放器的高度
@@ -45,9 +44,9 @@
 -->
 <!--video Api属性-->
     <script>
-        var myVideo = document.querySelector('video')
-        var btn = document.querySelectorAll('button')
-        var box = document.getElementById('box')
+        var myVideo = document.querySelector("video")
+        var btn = document.querySelectorAll("button")
+        var box = document.getElementById("box")
         console.log(btn);
         btn[0].onclick = function(){
             myVideo.muted = true;
@@ -65,14 +64,15 @@
             myVideo.webkitRequestFullScreen()
         }
         btn[5].onclick = function(){
-            box.innerHTML ='当前播放时间：${myV}
-            总时间：${myVideo.duration}<br/>
-            音量：${myVideo.volume}<br/>
-            是否静音：${myVideo.muted}<br/>
-            是否暂停：${myVideo.paused}<br/>
-            是否播放完毕：${myVideo.ended}<br/>
-            是否发生错误：${myVideo.error}<br/>
-            地址：${myVideo.currentSrc}';
+            box.innerHTML = `
+           当前播放时间:${myVideo.currentTime}<br/>
+           总时间:${myVideo.duration}<br/>
+           音量:${myVideo.volume}<br/>
+           是否静音：${myVideo.muted}<br/>
+           是否暂停：${myVideo.paused}<br/>
+           是否播放完毕：${myVideo.ended}<br/>
+           是否发生错误：${myVideo.error}<br/>
+           地址：${myVideo.currentSrc}`;
         }
         //基本事件
         //onplay 视频播放时触发的事件

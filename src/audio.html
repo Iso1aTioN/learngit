@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频</title>
+</head>
+<body>
+    <audio src="./戴羽彤 - 红色高跟鞋 (翻自 蔡健雅).mp3" controls>
+    浏览器版本过低会显示文字</audio>
+    <!--src 播放音频文件的路径
+        controls 允许用户控制基础操作
+        autoplay 自动播放
+        loop 循环播放
+        preload 加载播放
+        muted 静音
+    -->
+    <!---->
+    <button>静音</button>
+    <button>声音</button>
+    <button>播放</button>
+    <button>暂停</button>
+    <button>查看api属性</button>
+    <div id="box"></div>
+    <script>
+        //audio Api属性
+        //play
+        //paus
+        var myAudio = document.querySelector("audio")
+        var btn = document.querySelectorAll("button")
+        var box = document.getElementById("box")
+        console.log(btn);
+        btn[0].onclick = function(){
+            myAudio.muted = true;
+        }
+        btn[1].onclick = function(){
+            myAudio.muted = false;
+        }
+        btn[2].onclick = function(){
+            myAudio.play()
+        }
+        btn[3].onclick = function(){
+            myAudio.pause()
+        }
+        btn[4].onclick = function(){
+            box.innerHTML = `
+           当前播放时间:${myAudio.currentTime}<br/>
+           总时间:${myAudio.duration}<br/>
+           音量:${myAudio.volume}<br/>
+           是否静音：${myAudio.muted}<br/>
+           是否暂停：${myAudio.paused}<br/>
+           是否播放完毕：${myAudio.ended}<br/>
+           是否发生错误：${myAudio.error}<br/>
+           地址：${myAudio.currentSrc}`;
+        }
+        //基本事件
+        //onplay 视频播放时触发的事件
+        //onpause 视频暂停时触发的事件
+        //ontimeupdate视频在播放时触发
+        //onended 视频结束时触发
+        //canplay 视频加载完成时 能播放时
+        myAudio.onplay =function(){
+            console.log("我开始播放了");
+        }
+        myAudio.onpause=function(){
+            console.log("我暂停了");
+        }
+        myAudio.ontimeupdate =function(){
+            console.log("我一直在播放");
+        }
+        myAudio.onended =function(){
+            console.log("请三连");
+        }
+    </script>
+</body>
+</html>
