@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯</title>
+    <style>
+        canvas{
+            background: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="600"></canvas>
+    <script>
+    let myCanvas = document.querySelector('canvas')
+    let ctx = myCanvas.getContext('2d')
+    //setLineDash 方法接受一个数组
+    //lineDashOffset 设置虚线样式的起始偏移量
+    var offset = 0;
+    function xuxian() {
+        //清空矩形选区
+        ctx.clearRect(0,0,myCanvas.width,myCanvas.height)
+        ctx.setLineDash([10,7])
+        ctx.lineDashOffset = offset;
+        ctx.strokeRect(10,10,300,300)
+        
+    }
+    function run() {
+        offset++;
+        if (offset>10) {
+            offset = 0;
+        }
+        xuxian()
+        setTimeout(run,20)
+    }
+    run()
+    </script>
+</body>
+</html>
