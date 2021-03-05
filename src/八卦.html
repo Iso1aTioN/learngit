@@ -9,8 +9,11 @@
 <body>
     <canvas width="400" height="400" style="border: 1 solid;background: grey;"></canvas>
     <script>
+        let canvas = document.querySelector('canvas')
+        let ctx = canvas.getContext('2d')
+        
         window.onload = function(){
-            var ctx = document.querySelector('canvas').getContext('2d')
+
             //绘制白色半圆
             ctx.beginPath()
             ctx.arc(200,200,80,1.5*Math.PI,Math.PI/2,false)
