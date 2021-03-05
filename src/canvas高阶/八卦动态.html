@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		 div{
+			width:600px;
+			height:600px;
+			background-color:#C1C1C1;
+			text-align:center;
+		} 
+		#canvas{
+			margin-top:100px;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			var deg =0;
+			var pointX = 0;
+			var pointY = 0;
+			setInterval(function(){
+				canvas.width =400;
+				canvas.height = 400;
+				context.translate(200,200);
+				deg += Math.PI/180;
+				context.rotate(deg);
+
+				//左半边的半圆
+				context.beginPath();
+				context.arc(0,0,200,Math.PI*0.5,Math.PI*1.5, false);
+				context.closePath();
+				context.fillStyle = 'white';
+				context.fill();
+
+				//右半边的半圆
+				context.beginPath();
+				context.arc(0,0,200,Math.PI*0.5,Math.PI*1.5,true);
+				context.closePath();
+				context.fillStyle = 'black';
+				context.fill();
+
+				//左半边上面的半圆
+				context.beginPath();
+				context.arc(0,-100,100,0,Math.PI*2,true);
+				context.closePath();
+				context.fillStyle = 'black';
+				context.fill();
+
+				//右半边上面的半圆
+				context.beginPath();
+				context.arc(0,100,100,0,Math.PI*2,true);
+				context.closePath();
+				context.fillStyle = 'white';
+				context.fill();
+
+				//在上面的半圆内画一个比半圆小的整圆,颜色填充为白色
+				context.beginPath();
+				context.arc(0,-100,20,0,Math.PI*2,true);
+				context.closePath();
+				context.fillStyle = 'white';
+				context.fill();
+				 
+				//在下面的半圆内画一个比半圆小的整圆,颜色填充为黑色 
+				context.beginPath();
+				context.arc(0,100,20,0,Math.PI*2,true);
+				context.closePath();
+				context.fillStyle = 'black';
+				context.fill();
+			},5);
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<canvas id="canvas" width="400px" height="400px"></canvas>
+	</div>
+</body>
+</html>
