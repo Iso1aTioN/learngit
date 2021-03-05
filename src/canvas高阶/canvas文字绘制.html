@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字绘制</title>
+    <style>
+        canvas{
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600" height="600">
+        浏览器版本过低
+    </canvas>
+    <script>
+        //fillText(tex,x,y)绘制实心文本
+        //strokeText(text,x,y)绘制空心文本
+        //ctx.font = "字体大小 '宋体'"
+        //ctx.textAlign = "" 文本字体左右对齐方式 start left right end center
+        //textBaseline 文本上下对齐方式
+        //measureText 将返回一个 TextMetrics对象的宽度、所在像素
+        let canvas = document.querySelector('canvas')
+        let ctx = canvas.getContext('2d')
+        //绘制x轴
+        ctx.beginPath()
+        ctx.moveTo(0,301)
+        ctx.lineTo(900,301)
+        ctx.strokeStyle = "blue"
+        ctx.stroke()
+        //绘制y轴
+        ctx.beginPath()
+        ctx.moveTo(300,0)
+        ctx.lineTo(300,600)
+        ctx.strokeStyle = "blue"
+        ctx.stroke()
+
+        ctx.font = "20px '微软雅黑'";//设置字体
+        ctx.fillStyle = 'red';//设置填充颜色
+        ctx.textBaseline = 'top';//设置字体顶线对齐绘制的基线
+        ctx.fillText('Top-b',100,300)//填充文字
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('bottom',150,300)
+
+
+    </script>
+</body>
+</html>
