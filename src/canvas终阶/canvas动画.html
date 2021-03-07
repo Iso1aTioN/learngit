@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            border: 1px solid greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600"></canvas>
+    <script>
+        let canvas = document.querySelector('canvas')
+        let ctx = canvas.getContext('2d')
+        let y = 100;
+        let yidong = setInterval(function() {
+            ctx.beginPath()
+            ctx.fillStyle = "rgb(255,255,255,0.4)"
+            // ctx.clearRect(0,0,500,500)
+            ctx.fillRect(0,0,canvas.width,canvas.height)
+            ctx.fillStyle = "black"
+            ctx.arc(233,y++,66,0,2*Math.PI)
+            ctx.fill()
+            if (y == canvas.height+120) {
+                clearInterval(yidong);
+                console.log("你的工作已经结束了");
+            }
+        }, 1000/60);
+    </script>
+</body>
+</html>
