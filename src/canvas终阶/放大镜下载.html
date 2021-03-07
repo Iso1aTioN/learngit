@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大镜</title>
+</head>
+<body>
+    <canvas class="pic" width="800" height="600"></canvas>
+    <canvas class="pic2" width="400" height="400"></canvas>
+    <button class="btn">下载</button>
+    <script>
+        let canvas1 = document.querySelector('.pic')
+        let canvas2 = document.querySelector('.pic2')
+        let ctx1 = canvas1.getContext('2d')
+        let ctx2 = canvas2.getContext('2d')
+        let imgData;
+        let img = new Image()
+        img.src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fww1.sinaimg.cn%2Fmw690%2Fb9af179fly1go1fti0d1lj20rr0f0abp.jpg&refer=http%3A%2F%2Fwww.sina.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617708803&t=d3358cff416622282ea002dddccdc0bd"
+        img.setAttribute("crossOrigin",'Anonymous');
+        img.onload = function () {
+            ctx1.drawImage(img,0,0,600,600)
+        }
+        ctx2.imageSmoothingEnabled = true;
+        canvas1.addEventListener('mousemove',function (ev) {
+            ctx2.clearRect(0,0,400,800);
+            ctx2.drawImage(canvas1,ev.offsetX,ev.offsetY,50,50,0,0,400,400);
+        })
+        document.querySelector('.btn').addEventListener('click',function () {
+            var base64Img = canvas1.toDataUrl('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fww1.sinaimg.cn%2Fmw690%2Fb9af179fly1go1fti0d1lj20rr0f0abp.jpg&refer=http%3A%2F%2Fwww.sina.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617708803&t=d3358cff416622282ea002dddccdc0bd')
+            var oA = document.createElement('a');
+            oA.href = base64Img;
+            oA.download = "5t5.jpg"
+            oA.click()
+        })
+    </script>
+</body>
+</html>
