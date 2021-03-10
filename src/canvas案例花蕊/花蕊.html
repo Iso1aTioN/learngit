@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>花蕊</title>
+    <style>
+        html,body{
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+        canvas{
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <canvas>浏览器版本过低</canvas>
+    <script>
+        //1.canvas 大小自适应
+        const canvas = {
+            init(){
+                this.ele = document.querySelector('canvas')
+                //调整画布大小
+                this.resize()
+                //监听窗体大小进行调整
+                window.addEventListener('resize',()=>this.resize(),false)
+                return this.ele.getContext('2d');
+            },
+            resize(){
+                //offsetwidth width+panding+border
+                this.width = this.ele.width = this.ele.offsetwidth
+                this.height = this.ele.height = this.ele.offsetheight
+            }
+        }
+        const point = {
+            x:0,
+            y:0,
+            xb:0,
+            yb:0,
+            next:null,
+            frame:0,
+            //定义一个鼠标的初始化
+            init(canvas){
+                canvas.ele.addEventListener('mousemove',e =>this.move(e))
+            },
+            move(e){
+                this.x = e.clientX
+                this.y = e.clientY
+                //鼠标移动为了什么 开花 开在哪 定位
+                this.shoot(this.x,this.y)
+            },
+            shoot(x,y){
+                //是否第一次进入进入页面
+                if (!this.next) {
+                    this.netx = new Flower()
+                    Flower.push(this.next)
+                }
+                //鼠标移动操作
+                //Math.atan2(y,x) == 弧度 返回的是从x轴到点(x,y)之间的角度
+                this.next.shoot(x,y,Math.atan2(y-this.yb,x-this.yb))
+                this.next = null;
+                this.xb = x
+                this.yb = y
+                this.frame ++;
+                if (!(this.frame%3)) {
+                    ctx.fillStyle = "rgba(0,0,0,0.05)"
+                    ctx.fillRect(0,0,canvas.width,canvas.height)
+                }
+            }
+        }
+        class Flower{
+            constructor(){
+                this.x = 0//坐标
+                this.y = 0
+                this.radius = 0//圆半径
+                this.direction = 0//方位
+                this.dDir = 0//弧度
+                this.rightORleft = false//花朵旋转的方向
+                this.shooted = false//开花发芽
+                this.color = 0
+            }
+            //开花在哪 方位
+            shoot(x,y,direction){
+                this.shooted = true
+                this.x = x
+                this.y = y
+                this.direction = direction
+                this.dDir = Math.random()
+                this.radius = Math.random()*20+5
+                this.rightORleft = Math.random()<0.5
+                //颜色随机
+                this.color = `hsl(${Math.floor(Math.random()*90)-(Math.random()>0.33?30:160)},80%,60%)`
+            }
+            anim(){
+                if (!this.shooted) {
+                    pointer.next = this
+                    return
+                }
+                //花朵是圆形 坐标不断发生变化
+                this.x += this.radius*Math.cos(this.direction)
+                this.y += this.radius*Math.sin(this.direction)
+                ctx.beginPath()
+                ctx.fillStyle = this.color
+                //小小圆
+                ctx.arc(this.x,this.y,this.radius*0.5,0,2*Math.PI)
+                ctx.fill()
+                ctx.stroke()
+                //直线变弧线
+                if (this.rightORleft)this.direction -=this.dDir
+                else this.direction += this.dDir
+                this.radius -= 0.4
+                if (this.radius<=0)this.shooted = false
+                    
+                
+            }
+        }
+        //2.画笔
+        const ctx = canvas.init()
+        //3.鼠标移动
+        //具体操作在画布上
+        poiter.init(canvas)
+        //4.花
+        const Flowers = []
+        const play = ()=>{
+            for(const f of Flowers){
+                f.anim()
+            }
+            //执行一个动画 要求浏览器再次重绘之前调用指定的函数进行动画更新
+            requestAnimationFrame(play)
+        }
+        for (let size = 0; size < 2*Math.PI; size+=0.1) {
+            pointer.shoot(
+                canvas.width*0.5+Math.cos(size)*canvas.width*0.25,
+                canvas.height*0.5+Math.cos(size)*canvas.height*0.25
+                )
+            
+        }
+        play()
+    </script>
+</body>
+</html>
